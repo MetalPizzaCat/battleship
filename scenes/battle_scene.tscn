@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://0wmotps85fn6"]
+
+[ext_resource type="PackedScene" uid="uid://dluh52a7g83nc" path="res://scenes/sea_grid.tscn" id="1_idkgt"]
+[ext_resource type="Script" uid="uid://ca2nplriew1m7" path="res://scenes/battle_scene.gd" id="1_kinr6"]
+
+[node name="BattleScene" type="Node2D" unique_id=2041070887]
+script = ExtResource("1_kinr6")
+
+[node name="OwnSeaGrid" parent="." unique_id=1638523860 instance=ExtResource("1_idkgt")]
+position = Vector2(64, 64)
+
+[node name="EnemySeaGrid" parent="." unique_id=335320448 instance=ExtResource("1_idkgt")]
+position = Vector2(896, 64)
+
+[node name="Label" type="Label" parent="." unique_id=2011408549]
+offset_left = 256.0
+offset_top = 16.0
+offset_right = 296.0
+offset_bottom = 39.0
+text = "You"
+
+[node name="Label2" type="Label" parent="." unique_id=239272343]
+offset_left = 1088.0
+offset_top = 16.0
+offset_right = 1128.0
+offset_bottom = 39.0
+text = "Enemy
+"
+
+[node name="TurnOrderLabel" type="Label" parent="." unique_id=497170058]
+offset_left = 568.0
+offset_right = 608.0
+offset_bottom = 23.0

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://csee2ttsuqc4w"]
+
+[ext_resource type="Texture2D" uid="uid://boa2mteqx2bvq" path="res://textures/grid.svg" id="1_u8vqh"]
+
+[node name="SeaGridButton" type="Button" unique_id=375131998]
+offset_right = 32.0
+offset_bottom = 32.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1928491417]
+texture_filter = 1
+position = Vector2(32, 32)
+scale = Vector2(2, 2)
+texture = ExtResource("1_u8vqh")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)

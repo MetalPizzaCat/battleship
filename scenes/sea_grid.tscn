@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dluh52a7g83nc"]
+
+[ext_resource type="Script" uid="uid://borunwh4lf0qp" path="res://scenes/sea_grid.gd" id="1_1lb63"]
+[ext_resource type="PackedScene" uid="uid://csee2ttsuqc4w" path="res://scenes/sea_grid_button.tscn" id="2_mw3ct"]
+
+[node name="SeaGrid" type="Node2D" unique_id=1638523860]
+script = ExtResource("1_1lb63")
+button_prefab = ExtResource("2_mw3ct")
