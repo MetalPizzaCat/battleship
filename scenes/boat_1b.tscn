@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://yh6kdm14jpuh"]
+
+[ext_resource type="PackedScene" uid="uid://cmju8ocagvlxx" path="res://models/boat.glb" id="1_kogrl"]
+[ext_resource type="Material" uid="uid://bxbrdc72k2nu4" path="res://textures/boat_test.tres" id="2_ghf6m"]
+
+[node name="boat" unique_id=947969179 instance=ExtResource("1_kogrl")]
+
+[node name="Cube" parent="." index="0" unique_id=1713724545]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.58788306, 0)
+surface_material_override/0 = ExtResource("2_ghf6m")

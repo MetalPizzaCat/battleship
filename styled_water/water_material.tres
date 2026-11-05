@@ -1,0 +1,20 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://vupq4xdw4cs4"]
+
+[ext_resource type="Shader" uid="uid://chy2go4ieprps" path="res://styled_water/stylized_water.gdshader" id="1_water"]
+[ext_resource type="Texture2D" uid="uid://fnrpdyrdbysq" path="res://styled_water/water_normal_a.png" id="2_normal_a"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_water")
+shader_parameter/shallow_color = Color(0.24, 0.8, 0.76, 0.45)
+shader_parameter/deep_color = Color(0.12881625, 0.2475025, 0.2753235, 0.9411765)
+shader_parameter/depth_distance = 2.0
+shader_parameter/foam_color = Color(0.96, 0.98, 1, 1)
+shader_parameter/foam_width = 0.22800001083
+shader_parameter/wave_height = 0.57200002717
+shader_parameter/wave_length = 12.2600005586
+shader_parameter/wave_speed = 0.5
+shader_parameter/normal_map_a = ExtResource("2_normal_a")
+shader_parameter/normal_scale = 0.25
+shader_parameter/normal_tile_size = 8.0
+shader_parameter/roughness = 0.06

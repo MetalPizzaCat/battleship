@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cy6wpwbbfb426"]
+
+[ext_resource type="Script" uid="uid://b10c884vq3q2o" path="res://scenes/seagrid_3d.gd" id="1_mtxvj"]
+[ext_resource type="PackedScene" uid="uid://cjbgfkxqs3jfc" path="res://models/grid_10x10.glb" id="2_vk6mp"]
+[ext_resource type="PackedScene" uid="uid://cunxds8esogac" path="res://scenes/boats/boat_2b.tscn" id="4_0y7q0"]
+[ext_resource type="PackedScene" uid="uid://dwpgag635vbqn" path="res://scenes/cell_button.tscn" id="4_7ofdm"]
+[ext_resource type="PackedScene" uid="uid://c50d2v48k4x0t" path="res://scenes/boats/boat_1b.tscn" id="5_3fitk"]
+
+[node name="SeaGrid" type="Node3D" unique_id=709162472 node_paths=PackedStringArray("ships")]
+script = ExtResource("1_mtxvj")
+grid_line_model = ExtResource("2_vk6mp")
+grid_cell_button = ExtResource("4_7ofdm")
+ships = [NodePath("Boat2Blocks"), NodePath("Boat1Block")]
+
+[node name="Boat2Blocks" parent="." unique_id=123135572 instance=ExtResource("4_0y7q0")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.7350345, 0, 21.796892)
+monitorable = true
+
+[node name="Boat1Block" parent="." unique_id=1458480681 instance=ExtResource("5_3fitk")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 5.20158, 0, 21.616005)
+monitorable = true
+
+[connection signal="input_event" from="Boat2Blocks" to="Boat2Blocks" method="_on_input_event"]
+[connection signal="input_event" from="Boat1Block" to="Boat1Block" method="_on_input_event"]

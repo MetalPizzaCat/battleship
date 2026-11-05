@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://dwpgag635vbqn"]
+
+[ext_resource type="Script" uid="uid://c4pg8u5jpe26l" path="res://scenes/cell_button.gd" id="1_w6taw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iydms"]
+size = Vector3(1.857666, 1, 1.833313)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iydms"]
+size = Vector3(1.7367554, 1, 1.7203369)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6taw"]
+transparency = 1
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(2.2621452e-06, 0.57723236, 0.48066378, 0.39215687)
+emission_enabled = true
+emission = Color(0.8946027, 0, 0.43437898, 1)
+stencil_flags = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vk6mp"]
+transparency = 1
+shading_mode = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(2.2621452e-06, 0.57723236, 0.48066378, 0.39215687)
+emission_enabled = true
+emission = Color(0, 0.56907, 0.54679793, 1)
+stencil_flags = 2
+
+[node name="CellArea" type="Area3D" unique_id=1048018270]
+script = ExtResource("1_w6taw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=415477459]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0013427734, 0, 0.0030822754)
+shape = SubResource("BoxShape3D_iydms")
+
+[node name="CursorHighlightMesh" type="MeshInstance3D" parent="." unique_id=854708105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0055236816, 0, 0.0032348633)
+visible = false
+mesh = SubResource("BoxMesh_iydms")
+surface_material_override/0 = SubResource("StandardMaterial3D_w6taw")
+
+[node name="PreviewCellMesh" type="MeshInstance3D" parent="." unique_id=1321378237]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0055236816, 0, 0.0032348633)
+visible = false
+mesh = SubResource("BoxMesh_iydms")
+surface_material_override/0 = SubResource("StandardMaterial3D_vk6mp")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="input_event" from="." to="." method="_on_input_event"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

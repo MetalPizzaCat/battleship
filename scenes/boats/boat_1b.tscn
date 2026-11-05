@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c50d2v48k4x0t"]
+
+[ext_resource type="PackedScene" uid="uid://b8lybpfyqufv7" path="res://scenes/boats/boat_base.tscn" id="1_xkxe0"]
+[ext_resource type="PackedScene" uid="uid://cmju8ocagvlxx" path="res://models/boat.glb" id="2_1s8xq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qh4wg"]
+size = Vector3(1.5550461, 2.2919922, 1.7625732)
+
+[node name="Boat" unique_id=703865507 instance=ExtResource("1_xkxe0")]
+
+[node name="boat" parent="." index="0" unique_id=947969179 instance=ExtResource("2_1s8xq")]
+
+[node name="CollisionShape3D" parent="." index="1" unique_id=1854781770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.006000519, 0.6459961, -0.038635254)
+shape = SubResource("BoxShape3D_qh4wg")

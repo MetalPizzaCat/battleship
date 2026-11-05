@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b8lybpfyqufv7"]
+
+[ext_resource type="Script" uid="uid://56j201borfrc" path="res://scenes/boats/boat_base.gd" id="1_48dwv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iydms"]
+
+[node name="Boat" type="Area3D" unique_id=657056192]
+monitorable = false
+script = ExtResource("1_48dwv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1854781770]
+shape = SubResource("BoxShape3D_iydms")
