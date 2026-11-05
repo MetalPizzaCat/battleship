@@ -10,7 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
-game_scene_path = "uid://0wmotps85fn6"
+game_scene_path = "uid://dx62223pryjn2"
 
 [node name="HostGameButton" type="Button" parent="." unique_id=990926939]
 layout_mode = 0

@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cy6wpwbbfb426" path="res://scenes/seagrid3d.tscn" id="1_pan63"]
 [ext_resource type="Script" uid="uid://d1ds56yb35si1" path="res://scenes/battle_scene_3d.gd" id="1_wev8k"]
+[ext_resource type="PackedScene" uid="uid://bwqe5410xpphc" path="res://scenes/battle_interaface.tscn" id="2_55qwu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pan63"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -19,6 +20,9 @@ glow_enabled = true
 [node name="BattleScene3d" type="Node3D" unique_id=2055198121]
 script = ExtResource("1_wev8k")
 
+[node name="BattleInteraface" parent="." unique_id=1286226393 instance=ExtResource("2_55qwu")]
+mouse_filter = 1
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=765648784]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
@@ -31,6 +35,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.48, -0.3204, -2.295)
 
 [node name="EnemyGrid" parent="." unique_id=1602021335 instance=ExtResource("1_pan63")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.55, -0.3204, -2.295)
+allow_manual_ship_placement = false
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=863943555]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 14.635, 16.599, 8.5)
+
+[connection signal="toggled" from="BattleInteraface/Button" to="." method="_on_ready_button_toggled"]
+[connection signal="ship_placement_updated" from="OwnGrid" to="." method="_on_own_grid_ship_placement_updated"]
+
+[editable path="BattleInteraface"]

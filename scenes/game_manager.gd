@@ -21,9 +21,15 @@ var battle_scene: BattleScene
 func upload_grid_layout(grid: Dictionary) -> void:
 	if multiplayer.is_server():
 		player_armies[multiplayer.get_remote_sender_id()] = grid
+		print("%s out of 2 players are ready" % player_armies.size())
 		if player_armies.size() == 2:
 			start_combat_section()
 
+
+@rpc("any_peer", "call_local", "reliable")
+func discard_grid_layout() -> void:
+	if multiplayer.is_server():
+		player_armies.erase(multiplayer.get_remote_sender_id())
 
 func start_combat_section() -> void:
 	current_player_id = player_armies.keys().pick_random()
@@ -32,6 +38,8 @@ func start_combat_section() -> void:
 
 	for user_id in player_armies:
 		send_turn_info_to_user.rpc_id(user_id, current_player_id == user_id)
+	get_tree().root.get_node("BattleScene3d").start_game.rpc()
+	
 
 func advance_turn_order() -> void:
 	turn_order_id = (turn_order_id + 1) % turn_order.size()
@@ -60,8 +68,8 @@ func do_move(grid_position: Vector2i) -> void: #
 
 @rpc("any_peer", "call_local", "reliable")
 func send_turn_info_to_user(is_player_turn: bool) -> void:
-	get_tree().root.get_node("BattleScene").set_turn_order_label(is_player_turn)
+	get_tree().root.get_node("BattleScene3d").set_turn_order_label(is_player_turn)
 
 @rpc("any_peer", "call_local", "reliable")
 func send_turn_response_to_client(response: HitResponse) -> void:
-	get_tree().root.get_node("BattleScene").handle_response(response)
+	get_tree().root.get_node("BattleScene3d").handle_response(response)
