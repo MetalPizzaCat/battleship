@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c0o02jfwv5i3g"]
+
+[ext_resource type="Script" uid="uid://drkfkpghggd14" path="res://scenes/markers/marker_base.gd" id="1_u48o3"]
+
+[node name="MarkerBase" type="Node3D" unique_id=1427979368]
+script = ExtResource("1_u48o3")
+
+[node name="Label3D" type="Label3D" parent="." unique_id=1539515048]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+text = "miss"
+font_size = 72

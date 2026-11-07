@@ -17,6 +17,9 @@ var has_ship_selected: bool = false
 var ship_rotation: int = 0
 var current_ship: Boat
 
+
+var current_state: State = State.GAME_SETUP
+
 var ship_positions: Dictionary[Boat.ShipType, Array] = {}
 
 
@@ -43,10 +46,49 @@ func _on_ready_button_toggled(toggled_on: bool) -> void:
 func start_game() -> void:
 	ready_button.visible = false
 	enemy_grid.switch_to_battle_mode()
-
-func handle_response(response: GameManager.HitResponse) -> void:
-	print(response)
+	current_state = State.GAME_IN_PROGRESS
 
 
 func set_turn_order_label(is_player_turn: bool) -> void:
 	turn_order_label.text = "[wave]Your turn![/wave]" if is_player_turn else "[shake]Enemy turn![/shake]"
+
+
+func _on_enemy_grid_cell_selected(cell: Vector2i) -> void:
+	if current_state != State.GAME_IN_PROGRESS:
+		return
+	GameManager.do_move.rpc(cell)
+
+
+# This is called when a user is being attacked 
+func handle_hit_on_own_field(hit: GameManager.HitResponse, pos: Vector2i) -> void:
+	match hit:
+		GameManager.HitResponse.INVALID:
+			return # should never be called anyway
+		GameManager.HitResponse.MISS:
+			own_grid.add_marker(pos, HitMarker.MarkerType.MISS)
+		GameManager.HitResponse.NEAR_MISS:
+			own_grid.add_marker(pos, HitMarker.MarkerType.NEAR_MISS)
+		GameManager.HitResponse.HIT:
+			own_grid.add_marker(pos, HitMarker.MarkerType.HIT)
+		GameManager.HitResponse.KILL:
+			own_grid.add_marker(pos, HitMarker.MarkerType.HIT)
+
+# This is called after user has sent their attack and needs to update the result of it
+func handle_response_to_own_attack(hit: GameManager.HitResponse, pos: Vector2i) -> void:
+	match hit:
+		GameManager.HitResponse.INVALID:
+			return # do absolutely nothing and wait for user to hit again
+		GameManager.HitResponse.MISS:
+			enemy_grid.add_marker(pos, HitMarker.MarkerType.MISS)
+		GameManager.HitResponse.NEAR_MISS:
+			enemy_grid.add_marker(pos, HitMarker.MarkerType.NEAR_MISS)
+		GameManager.HitResponse.HIT:
+			enemy_grid.add_marker(pos, HitMarker.MarkerType.HIT)
+		GameManager.HitResponse.KILL:
+			enemy_grid.add_marker(pos, HitMarker.MarkerType.HIT)
+			print("Killed ship!")
+
+
+func end_game(won: bool) -> void:
+	turn_order_label.text = "[rainbow]VICTORY!!![/rainbow]" if won else "[pulse]lost:([/pulse]"
+	current_state = State.GAME_OVER

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cy41xbtt1ots"]
+
+[ext_resource type="PackedScene" uid="uid://c0o02jfwv5i3g" path="res://scenes/markers/marker_base.tscn" id="1_x4g15"]
+
+[node name="MarkerHit" unique_id=1427979368 instance=ExtResource("1_x4g15")]

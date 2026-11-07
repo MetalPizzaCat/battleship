@@ -42,5 +42,6 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 14.6
 
 [connection signal="toggled" from="BattleInteraface/Button" to="." method="_on_ready_button_toggled"]
 [connection signal="ship_placement_updated" from="OwnGrid" to="." method="_on_own_grid_ship_placement_updated"]
+[connection signal="cell_selected" from="EnemyGrid" to="." method="_on_enemy_grid_cell_selected"]
 
 [editable path="BattleInteraface"]

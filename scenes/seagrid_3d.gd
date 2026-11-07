@@ -2,6 +2,7 @@ extends Node3D
 class_name SeaGrid3D
 
 signal ship_placement_updated
+signal cell_selected(cell: Vector2i)
 
 @export var grid_line_model: PackedScene
 @export var grid_cell_button: PackedScene
@@ -9,12 +10,16 @@ signal ship_placement_updated
 @export var height: int = 10
 @export var cell_size: int = 2
 
+@export var hit_marker_prefab: PackedScene
+
 @export var ships: Array[Boat] = []
 var buttons: Array[CellButton] = []
 var current_ship: Boat
 @export var allow_manual_ship_placement: bool = true
 
 var allow_ship_placement: bool = true
+
+var markers: Array[Node3D] = []
 
 func is_in_battle_mode() -> bool:
 	return not allow_manual_ship_placement and not allow_ship_placement
@@ -49,7 +54,6 @@ func _ready() -> void:
 
 
 	change_interaction_state(false)
-
 
 
 func cell_to_world_coordinates(pos: Vector2i) -> Vector3:
@@ -98,7 +102,7 @@ func on_cell_pressed(cell: Vector2i) -> void:
 		current_ship.position = cell_to_world_coordinates(cell)
 		drop_ship()
 	elif is_in_battle_mode():
-		print("shooting at")
+		cell_selected.emit(cell)
 		
 
 func on_cell_hovered_over(cell: Vector2i) -> void:
@@ -107,6 +111,7 @@ func on_cell_hovered_over(cell: Vector2i) -> void:
 	current_ship.position = cell_to_world_coordinates(cell)
 
 
+# Get state of the battle grid. The full return type is Dictionary[Boat.ShipType. Dictionary["string", Variant]]
 func get_grid_state() -> Dictionary[Boat.ShipType, Dictionary]:
 	var res: Dictionary[Boat.ShipType, Dictionary] = {}
 	for ship in ships:
@@ -118,3 +123,15 @@ func get_grid_state() -> Dictionary[Boat.ShipType, Dictionary]:
 		res[ship.type] = {"rotation": ship.rotation_degrees.y, "cells": ship.get_cell_overlaps().map(func(x: CellButton): return x.grid_position)}
 	print("current sea grid layout: %s" % res)
 	return res
+
+
+func add_marker(pos: Vector2i, hit: HitMarker.MarkerType) -> void:
+	if hit_marker_prefab == null:
+		return
+	var marker: HitMarker = hit_marker_prefab.instantiate()
+	marker.position = cell_to_world_coordinates(pos)
+	
+	markers.append(marker)
+	add_child(marker)
+	marker.marker_type = hit
+	print("marking %s as %s" % [pos, hit])
